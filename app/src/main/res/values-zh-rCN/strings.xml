@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">波意IR解码器</string>
+    <string name="action_settings">设置</string>
+    <string name="title_activity_settings">设置</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">一般</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+
+    <!-- Settings -->
+    <string name="pref_title_select_china_server">Select China Server</string>
+    <string name="pref_summary_select_china_server">Select China Server if locates in China</string>
+
+
+    <!-- my -->
+    <string name="button_learn_n_test">学习与发码</string>
+    <string name="title_demo1">Demo 1: 红外学习与发送</string>
+    <string name="intro_demo1">学习红外按键讯号, 并重新发码</string>
+    <string name="button_learn_n_recognize">学习与辨识</string>
+    <string name="title_demo2">Demo 2: 红外学习与云端辨识</string>
+    <string name="intro_demo2">学习红外按键, 并送到云端辨识与匹配遥控器</string>
+    <!-- learn and recognize -->
+    <string name="demo2_intro">按下面按键开始学习, 可学习多按键, 重按时会清除先前的学习结果.</string>
+    <string name="button_start_learning">开始学习</string>
+    <!-- learn and test -->
+    <string name="demo1_step1_info">1. 按下面按键开始学习. 遥控器要对准装置上的红外LED并保持3-5公分距离, 然后按下遥控器上要学习的按键.</string>
+    <string name="demo1_step2_info">2. 按下面按键发送上一次成功学习到的红外讯号.</string>
+    <string name="demo1_step3_info">3. 按下面按键将学习结果储存下来.</string>
+    <string name="button_test_key">发送已学习讯号</string>
+    <string name="button_remember">记忆</string>
+
+    <string name="connected">已连线</string>
+    <string name="disconnected">未连线</string>
+    <string name="button_restart_learning">重新开始学习</string>
+    <string name="no_remote_match">没有符合的遥控器</string>
+    <string name="match_remotes">符合的遥控器数目符合的遥控器数目</string>
+    <string name="loading_pls_wait">下载资料中, 请稍候...\n(第一次执行会花较长时间下载资料)</string>
+    <string name="load_ok">解码器资料已载入</string>
+    <string name="load_failed">解码器资料载入失败</string>
+    <string name="button_reload_formats">重新读取</string>
+    <string name="waiting_for_signal">等待红外讯号...</string>
+    <string name="failed_retry">失败, 请重试!</string>
+    <string name="learn_ok">学习成功</string>
+    <string name="learn_fail">学习失败</string>
+    <string name="uncognized_format">无法识别的格式</string>
+    <string name="sw_ver">软件版本</string>
+    <string name="fw_ver">固件版本</string>
+    <string name="tv_type">电视类</string>
+    <string name="ac_type">空调类</string>
+    <string name="auto_type">自动选择</string>
+
+</resources>

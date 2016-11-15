@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">BomeansIrReader</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+
+    <!-- Settings -->
+    <string name="pref_title_select_china_server">Select China Server</string>
+    <string name="pref_summary_select_china_server">Select China Server if locates in China</string>
+    <string name="pref_title_use_compressed_format">Use Compressed Format</string>
+    <string name="pref_summary_use_compressed_format">Learning data is in compressed format</string>
+
+
+    <!-- my -->
+    <string name="button_learn_n_test">Learn and Test</string>
+    <string name="title_demo1">Demo 1: Learn and Test</string>
+    <string name="intro_demo1">Learn a key from remote controller and re-transmit the learnt signal.</string>
+    <string name="button_learn_n_recognize">Learn and Recognize</string>
+    <string name="title_demo2">Demo 2: Lean and Recognize</string>
+    <string name="intro_demo2">Learn keys from a remote controller and match them to the cloud database</string>
+    <!-- learn and recognize -->
+    <string name="demo2_intro">Tap [Start Learning] to start learning the IR signals from the remote controller.</string>
+    <string name="button_start_learning">Start Learning</string>
+    <!-- learn and test -->
+    <string name="demo1_step1_info">1. Press [Start Learning] to enter the learning mode. Point your remote controller to the IR LED at a distance of around 3cm and press the key you want to learn.</string>
+    <string name="demo1_step2_info">2. To test the key, press the [Test Learned Key] to re-transmit the IR signal you just learned.</string>
+    <string name="demo1_step3_info">3. If the test result is as expected, save it for later use.</string>
+    <string name="button_test_key">Test Learned Key</string>
+    <string name="button_remember">Remember</string>
+
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="button_restart_learning">Re-start Learning</string>
+    <string name="no_remote_match">No remote matched</string>
+    <string name="match_remotes">Matched remotes</string>
+    <string name="loading_pls_wait">Initializing IR Reader, Please wait...\n(This may take several minutes for the first time running this demo.)</string>
+    <string name="load_ok">IR Reader loaded</string>
+    <string name="load_failed">IR Reader failed to loaded</string>
+    <string name="button_reload_formats">Reload Formats</string>
+    <string name="waiting_for_signal">Waiting for IR signal...</string>
+    <string name="failed_retry">Failed, please re-try!</string>
+    <string name="learn_ok">Learned OK</string>
+    <string name="learn_fail">Failed to learn</string>
+    <string name="uncognized_format">Unrecognized Format</string>
+    <string name="sw_ver">Software Version</string>
+    <string name="fw_ver">Firmware Version</string>
+    <string name="tv_type">TV type</string>
+    <string name="ac_type">AC type</string>
+    <string name="auto_type">Auto</string>
+
+</resources>
