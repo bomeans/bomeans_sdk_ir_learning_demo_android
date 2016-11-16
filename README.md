@@ -13,3 +13,5 @@ The whole process may look like this:
 (3) Matched remote controller(s) is sent back to user.
 
 And, yes, there might still have multiple remote controllers are matched. Most likely this is because some remote controllers share the same keys but have some advanced or special function keys that are different. In this case, the App can just recommend the one with more keys.
+
+[Note] You need to apply an Bomeans IR API Key for this demo code to run.
