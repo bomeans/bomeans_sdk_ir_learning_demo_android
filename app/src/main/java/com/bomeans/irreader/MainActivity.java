@@ -9,15 +9,12 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,7 +23,6 @@ import com.bomeans.IRKit.BIRReadFirmwareVersionCallback;
 import com.bomeans.IRKit.BIRReader;
 import com.bomeans.IRKit.BIRReaderCallback;
 import com.bomeans.IRKit.IRKit;
-import com.bomeans.usbserial.IRUARTCommand;
 
 public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.IBomeansUSBDongleCallback {
 
@@ -34,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
     private TextView mMessageText;
     private TextView mVersionInfo;
     private Button mLearnAndRecognizeButton;
+    private Button mLearnAndTestButton;
     private Button mReloadFormatsButton;
     private ProgressBar mProgressBar;
 
@@ -71,9 +68,9 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
         registerReceiver(mUsbReceiver, filter);
 
         // learn and transmit
-        Button learnAndTestButton = (Button) findViewById(R.id.learn_n_test_button);
-        if (null != learnAndTestButton) {
-            learnAndTestButton.setOnClickListener(new View.OnClickListener() {
+        mLearnAndTestButton = (Button) findViewById(R.id.learn_n_test_button);
+        if (null != mLearnAndTestButton) {
+            mLearnAndTestButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MainActivity.this, LearnAndSendActivity.class);
@@ -126,8 +123,20 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
         mUsbDongle = ((BomeansIrReaderApp) getApplication()).getUsbDongle();
         IRKit.setIRHW(mUsbDongle);
 
+        mUsbDongle.registerCallback(this);
+
         loadIrReader(false);
 
+    }
+
+    @Override
+    protected void onPause() {
+
+        if (null != mUsbDongle) {
+            mUsbDongle.unregisterCallback(this);
+        }
+
+        super.onPause();
     }
 
     private void loadIrReader(Boolean forceReload) {
@@ -197,8 +206,11 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
     private void updateUsbState() {
 
         if (null != mUsbDongle) {
+
             mUsbDongle.rescan();
 
+
+            /*
             this.setTitle(
                     String.format("%s (%s)", getResources().getString(R.string.app_name),
                             mUsbDongle.isAttached() ? getResources().getString(R.string.connected) : getResources().getString(R.string.disconnected))
@@ -208,6 +220,11 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
                 mUsbDongle.registerCallback(this);
                 sendVersionCommand();
             }
+
+            mLearnAndRecognizeButton.setEnabled(mUsbDongle.isAttached() &&
+                    (((BomeansIrReaderApp) getApplication()).getIrReader() != null));
+            mLearnAndTestButton.setEnabled(mUsbDongle.isAttached());
+            */
         }
     }
 
@@ -328,19 +345,14 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
         mVersionInfo.setText(String.format("%s: %s",
                 getResources().getString(R.string.sw_ver), BomeansIrReaderApp.getAppVersion()));
 
-        if (attached) {
-            this.setTitle(
-                    String.format("%s (%s)",
-                            getResources().getString(R.string.app_name),
-                            getResources().getString(R.string.connected))
-            );
-        } else {
-            this.setTitle(
-                    String.format("%s (%s)",
-                            getResources().getString(R.string.app_name),
-                            getResources().getString(R.string.disconnected))
-            );
-        }
+        this.setTitle(
+                String.format("%s (%s)", getResources().getString(R.string.app_name),
+                        attached ? getResources().getString(R.string.connected) : getResources().getString(R.string.disconnected))
+        );
+
+        mLearnAndRecognizeButton.setEnabled(attached &&
+                (((BomeansIrReaderApp) getApplication()).getIrReader() != null));
+        mLearnAndTestButton.setEnabled(attached);
 
     }
 }
