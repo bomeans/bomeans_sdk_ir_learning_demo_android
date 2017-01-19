@@ -281,6 +281,7 @@ public class LearnAndRecognizeActivity extends AppCompatActivity implements Bome
                                 intent.putExtra("TYPE_ID", typeId);
                                 intent.putExtra("BRAND_ID", brandId);
                                 intent.putExtra("REMOTE_ID", remoteId);
+                                intent.putExtra("REFRESH", false);
                                 startActivity(intent);
                             }
                         });

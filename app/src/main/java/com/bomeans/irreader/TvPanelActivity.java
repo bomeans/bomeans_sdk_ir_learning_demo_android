@@ -1,13 +1,10 @@
 package com.bomeans.irreader;
 
 import android.app.Activity;
-import android.content.Context;
-import android.os.Build;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,14 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bomeans.IRKit.BIRReader;
 import com.bomeans.IRKit.BIRRemote;
 import com.bomeans.IRKit.ConstValue;
 import com.bomeans.IRKit.IRKit;
 import com.bomeans.IRKit.IRemoteCreateCallBack;
 import com.bomeans.IRKit.IWebAPICallBack;
 import com.bomeans.IRKit.KeyName;
-import com.bomeans.usbserial.IRUARTCommand;
 
 import java.util.Locale;
 
@@ -37,6 +32,7 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
     private String mTypeId = null;
     private String mBrandId = null;
     private String mRemoteId = null;
+    private Boolean mRefresh = false;
 
     private ScrollView mScrollView;
     private ProgressBar mProgressBar;
@@ -62,6 +58,9 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
             }
             if (getIntent().hasExtra("REMOTE_ID")) {
                 mRemoteId = getIntent().getStringExtra("REMOTE_ID");
+            }
+            if (getIntent().hasExtra("REFRESH")) {
+                mRefresh = getIntent().getBooleanExtra("REFRESH", false);
             }
         }
 
@@ -109,7 +108,7 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
 
         final Activity thisActivity = this;
         if ((null != mTypeId) && (null != mBrandId) && (null != mRemoteId)) {
-            IRKit.createRemote(mTypeId, mBrandId, mRemoteId, false, new IRemoteCreateCallBack() {
+            IRKit.createRemote(mTypeId, mBrandId, mRemoteId, mRefresh, new IRemoteCreateCallBack() {
                 @Override
                 public void onCreateResult(Object remote, int result) {
 
@@ -164,7 +163,7 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
         mScrollView.removeAllViews();
 
         final Activity thisActivity = this;
-        IRKit.webGetKeyName(mTypeId, Locale.getDefault().getLanguage(), false, new IWebAPICallBack() {
+        IRKit.webGetKeyName(mTypeId, Locale.getDefault().getLanguage(), mRefresh, new IWebAPICallBack() {
             @Override
             public void onPreExecute() {
 

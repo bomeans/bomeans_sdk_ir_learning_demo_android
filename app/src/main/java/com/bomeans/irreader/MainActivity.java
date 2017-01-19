@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
 
     private boolean mDebugFunctions = false;
 
+    private boolean mDeviceAttached = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
                 }
             });
         }
-        mLearnAndRecognizeButton.setEnabled(false);
+        //mLearnAndRecognizeButton.setEnabled(false);
 
         // test function
         TextView testButtonDesc = (TextView) findViewById(R.id.test_button_desc);
@@ -155,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
                         ((BomeansIrReaderApp) getApplication()).setIrReader(birReader);
                         mMessageText.setText(getResources().getString(R.string.load_ok));
                         mMessageText.setTextColor(Color.BLACK);
-                        mLearnAndRecognizeButton.setEnabled(true);
+                        mLearnAndRecognizeButton.setEnabled(mDeviceAttached);
                         mProgressBar.setVisibility(View.GONE);
                         mReloadFormatsButton.setVisibility(View.VISIBLE);
                         
@@ -197,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
         } else {
             mMessageText.setText(getResources().getString(R.string.load_ok));
             mMessageText.setTextColor(Color.BLACK);
-            mLearnAndRecognizeButton.setEnabled(true);
+            mLearnAndRecognizeButton.setEnabled(mDeviceAttached);
             mProgressBar.setVisibility(View.GONE);
             mReloadFormatsButton.setVisibility(View.VISIBLE);
         }
@@ -342,17 +344,19 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
     @Override
     public void onDeviceStatusChanged(Boolean attached) {
 
+        mDeviceAttached = attached;
+
         mVersionInfo.setText(String.format("%s: %s",
                 getResources().getString(R.string.sw_ver), BomeansIrReaderApp.getAppVersion()));
 
         this.setTitle(
                 String.format("%s (%s)", getResources().getString(R.string.app_name),
-                        attached ? getResources().getString(R.string.connected) : getResources().getString(R.string.disconnected))
+                        mDeviceAttached ? getResources().getString(R.string.connected) : getResources().getString(R.string.disconnected))
         );
 
-        mLearnAndRecognizeButton.setEnabled(attached &&
+        mLearnAndRecognizeButton.setEnabled(mDeviceAttached &&
                 (((BomeansIrReaderApp) getApplication()).getIrReader() != null));
-        mLearnAndTestButton.setEnabled(attached);
+        mLearnAndTestButton.setEnabled(mDeviceAttached);
 
     }
 }
