@@ -62,6 +62,11 @@ public class BomeansUSBDongle implements IBMSUsbSerialCallback, BIRIRBlaster {
         if (mUsbSerial.isValid()) {
             mUsbSerial.createDeviceList();
             if (mUsbSerial.getDeviceCount() > 0) {
+
+                if (mUsbSerial.isOpen()) {
+                    return true;
+                }
+
                 if (mUsbSerial.connect(
                         0,
                         38400,
@@ -75,7 +80,7 @@ public class BomeansUSBDongle implements IBMSUsbSerialCallback, BIRIRBlaster {
             }
         }
 
-        mUsbSerial = null;
+        //mUsbSerial = null;
         return false;
     }
 
