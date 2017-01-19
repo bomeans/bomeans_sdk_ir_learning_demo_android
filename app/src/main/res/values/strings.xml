@@ -105,4 +105,5 @@
     <string name="ac_type">AC type</string>
     <string name="auto_type">Auto</string>
 
+    <string name="action_rescan_usb">Rescan USB</string>
 </resources>

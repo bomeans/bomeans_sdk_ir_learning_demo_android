@@ -7,4 +7,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_rescan_usb"
+        android:orderInCategory="200"
+        android:title="@string/action_rescan_usb"
+        android:icon="@android:drawable/ic_menu_save"
+        app:showAsAction="ifRoom" />
 </menu>

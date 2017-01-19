@@ -103,4 +103,5 @@
     <string name="ac_type">空调类</string>
     <string name="auto_type">自动选择</string>
 
+    <string name="action_rescan_usb">扫描USB</string>
 </resources>

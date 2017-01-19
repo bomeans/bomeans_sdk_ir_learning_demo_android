@@ -103,4 +103,5 @@
     <string name="ac_type">空調類</string>
     <string name="auto_type">自動選擇</string>
 
+    <string name="action_rescan_usb">掃描USB</string>
 </resources>
