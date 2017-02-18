@@ -269,10 +269,10 @@ public class LearnAndRecognizeActivity extends AppCompatActivity implements Bome
 
                     for (BIRReader.RemoteMatchResult result : matchResultList) {
                         Button button = new Button(thisActivity);
-                        button.setText(result.modelId);
-                        final String remoteId = result.modelId;
-                        final String typeId = result.typeId;
-                        final String brandId = result.brandId;
+                        button.setText(result.modelID);
+                        final String remoteId = result.modelID;
+                        final String typeId = result.typeID;
+                        final String brandId = result.brandID;
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

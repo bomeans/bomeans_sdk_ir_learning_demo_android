@@ -33,7 +33,7 @@ public class BomeansIrReaderApp extends Application {
 
         Boolean useChinaServer = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext())
-                .getBoolean("pref_select_china_server", true);
+                .getBoolean("pref_select_china_server", false);
         IRKit.setUseChineseServer(useChinaServer);
 
         /*
