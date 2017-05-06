@@ -16,8 +16,8 @@ import com.splunk.mint.Mint;
 public class BomeansIrReaderApp extends Application {
 
     // apply your api key and paste it below
-    private String API_KEY = "";
-    private String MINT_API_KEY = "";
+    private String API_KEY = "36c3862a5dddca583f3fb7e8effb712c0540ff7de";
+    private String MINT_API_KEY = "c4d2eaab";
 
     private BIRReader mIrReader = null;
     private BomeansUSBDongle mUsbDongle = null;

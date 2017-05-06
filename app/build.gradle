@@ -10,12 +10,29 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0.20170105"
+
+        applicationVariants.all { variant ->
+            changeAPKName(variant, buildType)
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+def changeAPKName(variant, buildType) {
+    def date = new Date();
+    variant.outputs.each { output ->
+        if (output.zipAlign) {
+            def file = output.outputFile
+            output.packageApplication.outputFile = new File(file.parent, "learning_demo-" + date.format('yyyyMMdd') + "-" + buildType.name + ".apk")
+        }
+        def file = output.packageApplication.outputFile
+        output.packageApplication.outputFile = new File(file.parent, "learning_demo-" + date.format('yyyyMMdd') + "-" + buildType.name + ".apk")
     }
 }
 
@@ -34,3 +51,14 @@ dependencies {
     compile project(path: ':usbserial')
     compile 'com.splunk.mint:mint:4.3.0'
 }
+
+task deleteAPK(type: Delete) {
+    delete '../release'
+}
+
+task createAPK(type: Copy) {
+    from('build/outputs/apk')
+    into('../release')
+}
+
+createAPK.dependsOn(deleteAPK, build)

@@ -62,9 +62,10 @@
     <string name="pref_title_vibrate">Vibrate</string>
 
     <!-- Settings -->
-    <string name="pref_title_select_china_server">Select China Server</string>
-    <string name="pref_summary_select_china_server">Select China Server if locates in China</string>
-
+    <string name="pref_title_select_china_server">使用中国服务器</string>
+    <string name="pref_summary_select_china_server">在中国时请选用中国服务器</string>
+    <string name="pref_title_use_compressed_format">Use Compressed Format</string>
+    <string name="pref_summary_use_compressed_format">Learning data is in compressed format</string>
 
     <!-- my -->
     <string name="button_learn_n_test">学习与发码</string>
