@@ -163,7 +163,7 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
         mScrollView.removeAllViews();
 
         final Activity thisActivity = this;
-        IRKit.webGetKeyName(mTypeId, Locale.getDefault().getLanguage(), mRefresh, new IWebAPICallBack() {
+        IRKit.webGetKeyName("0"/*mTypeId*/, Locale.getDefault().getLanguage(), mRefresh, new IWebAPICallBack() {
             @Override
             public void onPreExecute() {
 
@@ -211,9 +211,6 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
 
             }
         });
-
-
-
 
     }
 
