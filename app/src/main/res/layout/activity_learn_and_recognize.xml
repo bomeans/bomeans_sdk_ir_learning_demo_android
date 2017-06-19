@@ -61,6 +61,32 @@
 
     </RadioGroup>
 
+    <CheckBox
+        android:id="@+id/check_filter"
+        android:text="@string/check_enable_filtering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/text_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/type"
+        android:textSize="18sp"
+        android:enabled="false"/>
+
+    <TextView
+        android:id="@+id/text_brand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/brand"
+        android:textSize="18sp"
+        android:enabled="false"/>
+
+
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"

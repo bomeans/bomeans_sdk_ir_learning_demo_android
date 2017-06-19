@@ -22,7 +22,13 @@ import android.widget.TextView;
 import com.bomeans.IRKit.BIRReadFirmwareVersionCallback;
 import com.bomeans.IRKit.BIRReader;
 import com.bomeans.IRKit.BIRReaderCallback;
+import com.bomeans.IRKit.BrandItem;
+import com.bomeans.IRKit.ConstValue;
 import com.bomeans.IRKit.IRKit;
+import com.bomeans.IRKit.IWebAPICallBack;
+import com.bomeans.IRKit.TypeItem;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.IBomeansUSBDongleCallback {
 
@@ -37,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
     private boolean mDebugFunctions = false;
 
     private boolean mDeviceAttached = false;
+
+    private boolean mIrReaderDownloadCompleted;
+    private boolean mTypeDownloadCompleted;
+    private boolean[] mBrandDownloadCompleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
             mReloadFormatsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    loadIrReader(true);
+                    loadCloudData(true);
                 }
             });
         }
@@ -127,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
 
         mUsbDongle.registerCallback(this);
 
-        loadIrReader(false);
+        loadCloudData(false);
 
     }
 
@@ -144,20 +154,28 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
     private void loadIrReader(Boolean forceReload) {
         BIRReader irReader = ((BomeansIrReaderApp) getApplication()).getIrReader();
         if (null == irReader || forceReload) {
-            mMessageText.setText(getResources().getString(R.string.loading_pls_wait));
+            /*mMessageText.setText(getResources().getString(R.string.loading_pls_wait));
             mMessageText.setTextColor(Color.RED);
             mProgressBar.setVisibility(View.VISIBLE);
             mReloadFormatsButton.setVisibility(View.GONE);
-            mLearnAndRecognizeButton.setEnabled(false);
+            mLearnAndRecognizeButton.setEnabled(false);*/
+
             IRKit.createIRReader(forceReload, new BIRReaderCallback() {
                 @Override
                 public void onReaderCreated(BIRReader birReader) {
+
+                    mIrReaderDownloadCompleted = true;
+
                     if (null != birReader) {
 
                         ((BomeansIrReaderApp) getApplication()).setIrReader(birReader);
                         mMessageText.setText(getResources().getString(R.string.load_ok));
                         mMessageText.setTextColor(Color.BLACK);
-                        mLearnAndRecognizeButton.setEnabled(mDeviceAttached);
+                        if (BuildConfig.DEBUG) {
+                            mLearnAndRecognizeButton.setEnabled(mDeviceAttached);//true);
+                        } else {
+                            mLearnAndRecognizeButton.setEnabled(mDeviceAttached);
+                        }
                         mProgressBar.setVisibility(View.GONE);
                         mReloadFormatsButton.setVisibility(View.VISIBLE);
                         
@@ -189,10 +207,13 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
 
                 @Override
                 public void onReaderCreateFailed() {
+
+                    mIrReaderDownloadCompleted = true;
+
                     mMessageText.setText(getResources().getString(R.string.load_failed));
                     mMessageText.setTextColor(Color.RED);
                     mLearnAndRecognizeButton.setEnabled(false);
-                    mProgressBar.setVisibility(View.GONE);
+                    if (isDownloadCompleted()) { mProgressBar.setVisibility(View.GONE); }
                     mReloadFormatsButton.setVisibility(View.VISIBLE);
                 }
             });
@@ -252,9 +273,6 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
                 }
             });
 
-            /*IRUARTCommand uartCmd =
-                    new IRUARTCommand(IRUARTCommand.IR_UART_COMMAND_FIRMWARE_VERSION, null);
-            return mUsbDongle.sendCommand(uartCmd);*/
         }
         return false;
     }
@@ -302,45 +320,6 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
         }
     };
 
-    /*
-    @Override
-    public void onCommandReceived(IRUARTCommand uartCommand) {
-
-        if (null != uartCommand && uartCommand.isValid()) {
-            byte cmdId = uartCommand.getCommandID();
-
-            if (cmdId == IRUARTCommand.IR_UART_COMMAND_FIRMWARE_VERSION_RESPONSE) {
-
-                byte[] payload = uartCommand.getPayload();
-                if (null != payload && payload.length > 0) {
-                    final String version = new String(payload);
-
-                    switchLearningFormatDependsOnVersionNumber(version);
-
-                    this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            String info = String.format("%s: %s\n%s: %s",
-                                    getResources().getString(R.string.sw_ver),
-                                    BomeansIrReaderApp.getAppVersion(),
-                                    getResources().getString(R.string.fw_ver),
-                                    version);
-                            mVersionInfo.setText(info);
-                        }
-                    });
-                }
-            }
-        }
-    }
-
-    private void switchLearningFormatDependsOnVersionNumber(String version) {
-        PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext())
-                .edit()
-                .putBoolean("pref_use_compressed_format", version.startsWith("IR Reader_c") || version.startsWith("IR Readr_c"))
-                .commit();
-    }*/
-
     @Override
     public void onDeviceStatusChanged(Boolean attached) {
 
@@ -358,5 +337,107 @@ public class MainActivity extends AppCompatActivity implements BomeansUSBDongle.
                 (((BomeansIrReaderApp) getApplication()).getIrReader() != null));
         mLearnAndTestButton.setEnabled(mDeviceAttached);
 
+    }
+
+    private String getLanguageCode() {
+
+        String languageCode = Locale.getDefault().getCountry().toLowerCase(Locale.US);
+        return languageCode;
+    }
+
+    private void loadCloudData(final boolean forceReload) {
+
+        // reset flags
+        initDownloadCompletionFlags();
+
+        // GUI
+        mMessageText.setText(getResources().getString(R.string.loading_pls_wait));
+        mMessageText.setTextColor(Color.RED);
+        mProgressBar.setVisibility(View.VISIBLE);
+        mReloadFormatsButton.setVisibility(View.GONE);
+        mLearnAndRecognizeButton.setEnabled(false);
+
+        IRKit.webGetTypeList(getLanguageCode(), forceReload, new IWebAPICallBack() {
+            @Override
+            public void onPreExecute() {
+
+            }
+
+            @Override
+            public void onPostExecute(Object arrayObj, int errCode) {
+                if (errCode == ConstValue.BIRNoError) {
+                    TypeItem[] typeItems = (TypeItem[]) arrayObj;
+                    ((BomeansIrReaderApp) getApplication()).setTypes(typeItems);
+
+                    mTypeDownloadCompleted = true;
+
+                    // brand download flags
+                    mBrandDownloadCompleted = new boolean[typeItems.length];
+
+                    for (int i = 0; i < typeItems.length; i++) {
+                        mBrandDownloadCompleted[i] = false;
+                        loadBrands(typeItems[i], forceReload);
+                    }
+
+                    loadIrReader(forceReload);
+                }
+                else {
+                    // error
+                }
+            }
+
+            @Override
+            public void onProgressUpdate(Integer... integers) {
+
+            }
+        });
+    }
+
+    private void loadBrands(final TypeItem type, Boolean forceLoad) {
+
+        IRKit.webGetBrandList(type.typeId, 0, 10000, getLanguageCode(), null, forceLoad, new IWebAPICallBack() {
+
+            @Override
+            public void onPreExecute() {
+
+            }
+
+            @Override
+            public void onPostExecute(Object objectArray, int errCode) {
+
+                if (errCode == IRKit.BIRNoError) {
+
+                    ((BomeansIrReaderApp) getApplication()).setBrands(type.typeId, (BrandItem[])objectArray);
+                }
+
+                if (isDownloadCompleted()) {
+                    mProgressBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onProgressUpdate(Integer... integers) {
+
+            }
+        });
+    }
+
+    private void initDownloadCompletionFlags() {
+        mIrReaderDownloadCompleted = false;
+        mTypeDownloadCompleted = false;
+        mBrandDownloadCompleted = null;
+    }
+
+    private boolean isDownloadCompleted() {
+
+        if (null == mBrandDownloadCompleted) { return false; }
+        if (!mTypeDownloadCompleted) { return false; }
+        if (!mIrReaderDownloadCompleted) { return false; }
+
+        for(int i = 0; i < mBrandDownloadCompleted.length; i++) {
+            if (!mBrandDownloadCompleted[i]) { return false; }
+        }
+
+        return true;
     }
 }

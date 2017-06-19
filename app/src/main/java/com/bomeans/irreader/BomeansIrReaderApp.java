@@ -9,6 +9,8 @@ import android.preference.PreferenceManager;
 import com.bomeans.IRKit.*;
 import com.splunk.mint.Mint;
 
+import java.util.HashMap;
+
 /**
  *
  * Created by ray on 16/6/3.
@@ -16,12 +18,15 @@ import com.splunk.mint.Mint;
 public class BomeansIrReaderApp extends Application {
 
     // apply your api key and paste it below
-    private String API_KEY = "";
+    private String API_KEY = "36c3862a5dddca583f3fb7e8effb712c0540ff7de";
     private String MINT_API_KEY = "c4d2eaab";
 
     private BIRReader mIrReader = null;
     private BomeansUSBDongle mUsbDongle = null;
     private static Context mContext;
+
+    private TypeItemEx[] mTypes = new TypeItemEx[0];
+    private HashMap<String, BrandItemEx[]> mBrands = new HashMap<>();
 
     @Override
     public void onCreate() {
@@ -85,5 +90,30 @@ public class BomeansIrReaderApp extends Application {
         }
 
         return appVersion;
+    }
+
+    public void setTypes(TypeItem[] types) {
+        mTypes = new TypeItemEx[types.length];
+        for (int i = 0; i < types.length; i++) {
+            mTypes[i] = new TypeItemEx(types[i]);
+        }
+    }
+
+    public TypeItemEx[] getTypes() { return mTypes; }
+
+    public void setBrands(String typeId, BrandItem[] brands) {
+        if (mBrands.containsKey(typeId)) {
+            mBrands.remove(typeId);
+        }
+
+        BrandItemEx[] brandsEx = new BrandItemEx[brands.length];
+        for (int i = 0; i < brands.length; i++) {
+            brandsEx[i] = new BrandItemEx(brands[i]);
+        }
+        mBrands.put(typeId, brandsEx);
+    }
+
+    public BrandItemEx[] getBrands(String typeId) {
+        return mBrands.get(typeId);
     }
 }

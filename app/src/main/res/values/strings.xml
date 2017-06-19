@@ -106,4 +106,8 @@
     <string name="auto_type">Auto</string>
 
     <string name="action_rescan_usb">Rescan USB</string>
+
+    <string name="check_enable_filtering">Enable Filtering</string>
+    <string name="type">Type</string>
+    <string name="brand">Brand</string>
 </resources>

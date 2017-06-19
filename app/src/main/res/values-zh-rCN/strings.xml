@@ -105,4 +105,8 @@
     <string name="auto_type">自动选择</string>
 
     <string name="action_rescan_usb">扫描USB</string>
+
+    <string name="check_enable_filtering">过滤搜寻结果</string>
+    <string name="type">类型</string>
+    <string name="brand">厂牌</string>
 </resources>
