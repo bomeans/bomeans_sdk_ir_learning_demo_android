@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- POWER -->
+    <string name="IR_ACKEY_POWER">电源</string>
+    <string name="IR_ACOPT_POWER_ON">开</string>
+    <string name="IR_ACOPT_POWER_OFF">关</string>    
+    
+	<!-- MODE -->
+	<string name="IR_ACKEY_MODE">模式</string>
+	<string name="IR_ACOPT_MODE_COOL">制冷</string>
+	<string name="IR_ACOPT_MODE_WARM">制热</string>
+	<string name="IR_ACOPT_MODE_FAN">送风</string>
+	<string name="IR_ACOPT_MODE_DRY">干燥</string>
+	<string name="IR_ACOPT_MODE_AUTO">自动</string>
+
+	<!--  TEMP -->
+	<string name="IR_ACKEY_TEMP">温度</string>
+	<string name="IR_ACKEY_TEMP_UP">温度+</string>
+	<string name="IR_ACKEY_TEMP_DOWN">温度-</string>
+	
+	<!-- AIR SWING UP/DOWN -->
+	<string name="IR_ACKEY_AIRSWING_UD">上下摆风</string>
+	<string name="IR_ACOPT_AIRSWING_UD_A">自动</string>
+	<string name="IR_ACOPT_AIRSWING_UD_OFF">停止</string>
+	<string name="IR_ACOPT_AIRSWING_UD_1">位置1</string>
+	<string name="IR_ACOPT_AIRSWING_UD_2">位置2</string>
+	<string name="IR_ACOPT_AIRSWING_UD_3">位置3</string>
+	<string name="IR_ACOPT_AIRSWING_UD_4">位置4</string>
+	<string name="IR_ACOPT_AIRSWING_UD_5">位置5</string>
+	<string name="IR_ACOPT_AIRSWING_UD_6">位置6</string>
+	<string name="IR_ACOPT_AIRSWING_UD_7">位置7</string>
+	<string name="IR_ACOPT_AIRSWING_UD_8">位置8</string>
+
+	<!-- AIR SWING L/R -->
+	<string name="IR_ACKEY_AIRSWING_LR">左右摆风</string>
+	<string name="IR_ACOPT_AIRSWING_LR_A">自动</string>
+	<string name="IR_ACOPT_AIRSWING_LR_OFF">停止</string>
+	<string name="IR_ACOPT_AIRSWING_LR_1">位置1</string>
+	<string name="IR_ACOPT_AIRSWING_LR_2">位置2</string>
+	<string name="IR_ACOPT_AIRSWING_LR_3">位置3</string>
+	<string name="IR_ACOPT_AIRSWING_LR_4">位置4</string>
+	<string name="IR_ACOPT_AIRSWING_LR_5">位置5</string>
+	<string name="IR_ACOPT_AIRSWING_LR_6">位置6</string>
+	<string name="IR_ACOPT_AIRSWING_LR_7">位置7</string>
+	<string name="IR_ACOPT_AIRSWING_LR_8">位置8</string>
+	
+	<!-- FAN SPEED-->
+	<string name="IR_ACKEY_FANSPEED">风速</string>
+	<string name="IR_ACOPT_FANSPEED_A">自动</string>
+	<string name="IR_ACOPT_FANSPEED_L">低速</string>
+	<string name="IR_ACOPT_FANSPEED_M">中速</string>
+	<string name="IR_ACOPT_FANSPEED_H">高速</string>
+	<string name="IR_ACOPT_FANSPEED_H1">高速1</string>
+	<string name="IR_ACOPT_FANSPEED_H2">高速2</string>
+	<string name="IR_ACOPT_FANSPEED_H3">高速3</string>
+
+	<!-- AIR SWAP -->
+	<string name="IR_ACKEY_AIRSWAP">换气</string>
+	<string name="IR_ACOPT_AIRSWAP_ON">开</string>
+	<string name="IR_ACOPT_AIRSWAP_OFF">关</string>
+	<string name="IR_ACOPT_AIRSWAP_1">1</string>
+	<string name="IR_ACOPT_AIRSWAP_2">2</string>
+	<string name="IR_ACOPT_AIRSWAP_3">3</string>
+	
+	<!-- Others (On/Off) -->
+	<string name="IR_ACKEY_SLEEP">睡眠</string>
+	<string name="IR_ACKEY_TURBO">强力</string>
+	<string name="IR_ACKEY_QUICK">快速</string>
+	<string name="IR_ACKEY_AIRCLEAN">空气清净</string>
+	<string name="IR_ACKEY_WARMUP">暖机</string>
+	<string name="IR_ACKEY_DISPLAY">显示</string>
+	<string name="IR_ACKEY_ANIMDISPLAY">动态显示</string>
+	<string name="IR_ACKEY_LOCK">所定</string>
+	<string name="IR_ACKEY_DEMOLD">除霉</string>
+	<string name="IR_ACKEY_POWERSAVING">省电</string>
+	<string name="IR_ACKEY_SILENT">静音</string>
+	<string name="IR_ACKEY_RHYTHM">韵律风</string>
+	<string name="IR_ACKEY_FUZZY">模糊控制</string>
+	<string name="IR_ACKEY_SENSING">随身感</string>
+	<string name="IR_ACKEY_LIGHT">灯光</string>
+	<string name="IR_ACKEY_PRESET">一键爽</string>
+	<string name="IR_ACKEY_MOTION_SENSING">动感仪</string>
+	<string name="IR_ACKEY_LIGHT_SENSING">光感仪</string>
+	
+	<string name="IR_ACOPT_ON">开</string>
+	<string name="IR_ACOPT_OFF">关</string>
+	
+	<!-- Timers -->
+	<string name="IR_ACKEY_RTC">时钟</string>
+	<string name="IR_ACKEY_ONTIMER">定时开机</string>
+	<string name="IR_ACKEY_OFFTIMER">定时关机</string>
+	<string name="IR_ACKEY_TIMER">定时开关</string>
+    
+	<!-- Virtual / use for GUI only -->
+	<string name="SetOnTimerTime">设定定时开机时间</string>
+	<string name="SetOffTimerTime">设定定时关机时间</string>
+	
+</resources>

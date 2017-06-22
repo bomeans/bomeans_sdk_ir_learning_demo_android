@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- POWER -->
+    <string name="IR_ACKEY_POWER">POWER</string>
+    <string name="IR_ACOPT_POWER_ON">PWR ON</string>
+    <string name="IR_ACOPT_POWER_OFF">PWR OFF</string>
+    
+    <!-- MODE -->
+	<string name="IR_ACKEY_MODE">MODE</string>
+	<string name="IR_ACOPT_MODE_COOL">COOL</string>
+	<string name="IR_ACOPT_MODE_WARM">WARM</string>
+	<string name="IR_ACOPT_MODE_FAN">FAN</string>
+	<string name="IR_ACOPT_MODE_DRY">DRY</string>
+	<string name="IR_ACOPT_MODE_AUTO">AUTO</string>
+	
+	<!--  TEMP -->
+	<string name="IR_ACKEY_TEMP">TEMP</string>
+	<string name="IR_ACKEY_TEMP_UP">TEMP+</string>
+	<string name="IR_ACKEY_TEMP_DOWN">TEMP-</string>
+	
+	<!-- AIR SWING UP/DOWN -->
+	<string name="IR_ACKEY_AIRSWING_UD">SWING UP/DN</string>
+	<string name="IR_ACOPT_AIRSWING_UD_A">Auto</string>
+	<string name="IR_ACOPT_AIRSWING_UD_OFF">Off</string>
+	<string name="IR_ACOPT_AIRSWING_UD_1">1</string>
+	<string name="IR_ACOPT_AIRSWING_UD_2">2</string>
+	<string name="IR_ACOPT_AIRSWING_UD_3">3</string>
+	<string name="IR_ACOPT_AIRSWING_UD_4">4</string>
+	<string name="IR_ACOPT_AIRSWING_UD_5">5</string>
+	<string name="IR_ACOPT_AIRSWING_UD_6">6</string>
+	<string name="IR_ACOPT_AIRSWING_UD_7">7</string>
+	<string name="IR_ACOPT_AIRSWING_UD_8">8</string>
+	
+	<!-- AIR SWING L/R -->
+	<string name="IR_ACKEY_AIRSWING_LR">SWING L/R</string>
+	<string name="IR_ACOPT_AIRSWING_LR_A">Auto</string>
+	<string name="IR_ACOPT_AIRSWING_LR_OFF">Off</string>
+	<string name="IR_ACOPT_AIRSWING_LR_1">1</string>
+	<string name="IR_ACOPT_AIRSWING_LR_2">2</string>
+	<string name="IR_ACOPT_AIRSWING_LR_3">3</string>
+	<string name="IR_ACOPT_AIRSWING_LR_4">4</string>
+	<string name="IR_ACOPT_AIRSWING_LR_5">5</string>
+	<string name="IR_ACOPT_AIRSWING_LR_6">6</string>
+	<string name="IR_ACOPT_AIRSWING_LR_7">7</string>
+	<string name="IR_ACOPT_AIRSWING_LR_8">8</string>
+	
+	<!-- FAN SPEED-->
+	<string name="IR_ACKEY_FANSPEED">FAN SPEED</string>
+	<string name="IR_ACOPT_FANSPEED_A">Auto</string>
+	<string name="IR_ACOPT_FANSPEED_L">Low</string>
+	<string name="IR_ACOPT_FANSPEED_M">Middle</string>
+	<string name="IR_ACOPT_FANSPEED_H">High</string>
+	<string name="IR_ACOPT_FANSPEED_H1">High-1</string>
+	<string name="IR_ACOPT_FANSPEED_H2">High-2</string>
+	<string name="IR_ACOPT_FANSPEED_H3">High-3</string>
+	
+	<!-- AIR SWAP -->
+	<string name="IR_ACKEY_AIRSWAP">AIR SWAP</string>
+	<string name="IR_ACOPT_AIRSWAP_ON">ON</string>
+	<string name="IR_ACOPT_AIRSWAP_OFF">OFF</string>
+	<string name="IR_ACOPT_AIRSWAP_1">1</string>
+	<string name="IR_ACOPT_AIRSWAP_2">2</string>
+	<string name="IR_ACOPT_AIRSWAP_3">3</string>
+	
+	<!-- Others (On/Off) -->
+	<string name="IR_ACKEY_SLEEP">SLEEP</string>
+	<string name="IR_ACKEY_TURBO">TURBO</string>
+	<string name="IR_ACKEY_QUICK">QUICK</string>
+	<string name="IR_ACKEY_AIRCLEAN">AIR CLEAN</string>
+	<string name="IR_ACKEY_WARMUP">WARM UP</string>
+	<string name="IR_ACKEY_DISPLAY">DISP</string>
+	<string name="IR_ACKEY_ANIMDISPLAY">ANIM DISP</string>
+	<string name="IR_ACKEY_LOCK">LOCK</string>
+	<string name="IR_ACKEY_DEMOLD">DE-MOLD</string>
+	<string name="IR_ACKEY_POWERSAVING">PWR SAVE</string>
+	<string name="IR_ACKEY_SILENT">SILENT</string>
+	<string name="IR_ACKEY_RHYTHM">RYTHM</string>
+	<string name="IR_ACKEY_FUZZY">FUZZY</string>
+	<string name="IR_ACKEY_SENSING">SENSING</string>
+	<string name="IR_ACKEY_LIGHT">LIGHT</string>
+	<string name="IR_ACKEY_PRESET">PRESET</string>
+	<string name="IR_ACKEY_MOTION_SENSING">MOTION SENS</string>
+	<string name="IR_ACKEY_LIGHT_SENSING">LIGHT SENS</string>
+	
+	<string name="IR_ACOPT_ON">ON</string>
+	<string name="IR_ACOPT_OFF">OFF</string>
+	
+	<!-- Timers -->
+	<string name="IR_ACKEY_RTC">Clock</string>
+	<string name="IR_ACKEY_ONTIMER">ON TIMER</string>
+	<string name="IR_ACKEY_OFFTIMER">OFF TIMER</string>
+	<string name="IR_ACKEY_TIMER">TIMER</string>
+	
+	<!-- Virtual / use for GUI only -->
+	<string name="SetOnTimerTime">Set ON-Timer Time</string>
+	<string name="SetOffTimerTime">Set OFF-Timer Time</string>
+    
+</resources>
