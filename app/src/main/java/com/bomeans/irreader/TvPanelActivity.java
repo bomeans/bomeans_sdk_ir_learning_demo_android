@@ -1,53 +1,37 @@
 package com.bomeans.irreader;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.view.ViewTreeObserver;
+import android.widget.GridLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.bomeans.IRKit.BIRRemote;
-import com.bomeans.IRKit.ConstValue;
-import com.bomeans.IRKit.IRKit;
-import com.bomeans.IRKit.IRemoteCreateCallBack;
-import com.bomeans.IRKit.IWebAPICallBack;
-import com.bomeans.IRKit.KeyName;
-
-import java.util.Locale;
+import com.bomeans.irreader.panel.ACRemotePanel;
+import com.bomeans.irreader.panel.IRemotePanel;
+import com.bomeans.irreader.panel.IRemotePanelLoadedCallback;
+import com.bomeans.irreader.panel.TVRemotePanel;
 
 public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDongle.IBomeansUSBDongleCallback {
 
     private BomeansUSBDongle mUsbDongle;
-
-    private BIRRemote mBirRemote;
 
     private String mTypeId = null;
     private String mBrandId = null;
     private String mRemoteId = null;
     private Boolean mRefresh = false;
 
-    private ScrollView mScrollView;
     private ProgressBar mProgressBar;
+
+    private IRemotePanel mRemotePanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tv_panel);
 
-        // enable the back button on the action bar
-        ActionBar actionBar = getSupportActionBar();
-        if (null != actionBar) {
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
 
         if (savedInstanceState == null) {
             if (getIntent().hasExtra("TYPE_ID")) {
@@ -64,11 +48,116 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
             }
         }
 
-        mScrollView = (ScrollView) findViewById(R.id.main_scroll_view);
+        if (mTypeId.equalsIgnoreCase("2"/*"AC"*/)) {
+            setContentView(R.layout.panel_ac);
+
+            final GridLayout keyPanelView = (GridLayout) findViewById(R.id.remote_keys_layout);
+            final GridLayout displayPanelView = (GridLayout) findViewById(R.id.ac_display_panel_layout);
+
+            mRemotePanel = new ACRemotePanel(this, displayPanelView, keyPanelView);
+
+            ViewTreeObserver vto = keyPanelView.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    keyPanelView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                    if (null != mRemotePanel) {
+                        mRemotePanel.loadRemote(mTypeId, mBrandId, mRemoteId, mRefresh, new IRemotePanelLoadedCallback() {
+
+                            @Override
+                            public void onPanelLoaded(boolean succeeded) {
+                                if (null != mProgressBar) {
+                                    mProgressBar.setVisibility(View.GONE);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+        } else {
+            setContentView(R.layout.panel_tv);// activity_tv_panel);
+
+            final GridLayout keyPanelView = (GridLayout) findViewById(R.id.remote_keys_layout);
+
+            switch (mTypeId)
+            {
+                case "1"://"TV":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "3"://"SETTOP":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "6"://"MP3":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "4"://"AMP":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "5"://"DVD":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "7"://"GAME":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "8"://"FAN":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "9"://"PJ"
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "10"://"ROBOT":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                case "11"://"LIGHTING":
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+
+                default:
+                    mRemotePanel = new TVRemotePanel(this, keyPanelView);
+                    break;
+            }
+
+            ViewTreeObserver vto = keyPanelView.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    keyPanelView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                    if (null != mRemotePanel) {
+                        mRemotePanel.loadRemote(mTypeId, mBrandId, mRemoteId, mRefresh, new IRemotePanelLoadedCallback() {
+
+                            @Override
+                            public void onPanelLoaded(boolean succeeded) {
+                                if (null != mProgressBar) {
+                                    mProgressBar.setVisibility(View.GONE);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        // enable the back button on the action bar
+        ActionBar actionBar = getSupportActionBar();
+        if (null != actionBar) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
     }
-
-
 
     @Override
     protected void onResume() {
@@ -80,8 +169,6 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
             mUsbDongle.registerCallback(this);
 
             updateDeviceStatus(mUsbDongle.isAttached());
-
-
         }
     }
 
@@ -105,115 +192,8 @@ public class TvPanelActivity extends AppCompatActivity implements BomeansUSBDong
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        final Activity thisActivity = this;
-        if ((null != mTypeId) && (null != mBrandId) && (null != mRemoteId)) {
-            IRKit.createRemote(mTypeId, mBrandId, mRemoteId, mRefresh, new IRemoteCreateCallBack() {
-                @Override
-                public void onCreateResult(Object remote, int result) {
-
-                    if (result == ConstValue.BIRNoError) {
-
-                        mBirRemote = (BIRRemote) remote;
-
-                        thisActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                createButtons();
-                            }
-                        });
-                    } else {
-
-                        LinearLayout linearLayout = new LinearLayout(thisActivity);
-                        linearLayout.setOrientation(LinearLayout.VERTICAL);
-                        TextView msg = new TextView(thisActivity);
-                        Boolean isChinaServer = PreferenceManager
-                                .getDefaultSharedPreferences(getApplicationContext())
-                                .getBoolean("pref_select_china_server", true);
-                        msg.setText(String.format("ERROR LOADING REMOTE!\nIRKit.createRemote(TypeId=%s, BrandId=%s, RemoteId=%s) FAILED!\nServer:%s",
-                                mTypeId, mBrandId, mRemoteId, isChinaServer ? "China" : "International"));
-                        linearLayout.addView(msg);
-                        mScrollView.removeAllViews();
-                        mScrollView.addView(linearLayout);
-                        mProgressBar.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onPreCreate() {
-
-                }
-
-                @Override
-                public void onProgressUpdate(Integer... integers) {
-
-                }
-            });
-        }
-
         return super.onCreateOptionsMenu(menu);
     }
-
-    private void createButtons()
-    {
-        if ((null == mBirRemote) || (null == mScrollView)) {
-            return;
-        }
-
-        mScrollView.removeAllViews();
-
-        final Activity thisActivity = this;
-        IRKit.webGetKeyName("0"/*mTypeId*/, Locale.getDefault().getLanguage(), mRefresh, new IWebAPICallBack() {
-            @Override
-            public void onPreExecute() {
-
-            }
-
-            @Override
-            public void onPostExecute(Object o, int i) {
-                KeyName[] keyNames = (KeyName[]) o;
-
-                LinearLayout linearLayout = new LinearLayout(thisActivity);
-                linearLayout.setOrientation(LinearLayout.VERTICAL);
-
-                String[] keyIdList = mBirRemote.getAllKeys();
-                Button button;
-                for (String keyId : keyIdList) {
-                    button = new Button(thisActivity);
-
-                    button.setText(keyId);
-                    for (KeyName keyName : keyNames) {
-                        if (keyName.keyId.equalsIgnoreCase(keyId)) {
-                            button.setText(keyName.name);
-                            break;
-                        }
-                    }
-
-                    final String thisKeyId = keyId;
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mBirRemote.transmitIR(thisKeyId, null);
-                        }
-                    });
-                    linearLayout.addView(button);
-                }
-
-                mScrollView.removeAllViews();
-                mScrollView.addView(linearLayout);
-
-                mProgressBar.setVisibility(View.GONE);
-
-            }
-
-            @Override
-            public void onProgressUpdate(Integer... integers) {
-
-            }
-        });
-
-    }
-
 
     @Override
     public void onDeviceStatusChanged(Boolean attached) {

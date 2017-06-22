@@ -1,4 +1,4 @@
-package com.bomeans.irreader;
+package com.bomeans.irreader.panel;
 
 /**
  * Created by ray on 2017/6/19.
@@ -6,24 +6,13 @@ package com.bomeans.irreader;
 
 public interface IRemotePanel {
 
-    /**
-     * Get the associate remote XML file from the server or the local database
-     * (if down-loaded before.)
-     * @param remote remote instance
-     * @param refreshMenuItem refresh menu item
-     * @param bIsRefresh is triggered by refresh
-     * @return true if succeeded, false otherwise
-     */
-    //boolean getRemoteXML(AbstractFavRemote remote, MenuItem refreshMenuItem, boolean bIsRefresh);
+    boolean loadRemote(String typeId, String brandId, String remoteId, boolean getNew, IRemotePanelLoadedCallback callback);
 
-    /**
-     * dynamically create the GUI layout corresponding to the remote XML content.
-     */
     void createRemoteLayoutCallback();
 
     void saveStates();
 
-    String getCategoryString();
+    //String getCategoryString();
 
     boolean keyLayoutCreated();
 

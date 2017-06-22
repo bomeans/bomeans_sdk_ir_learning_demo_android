@@ -146,4 +146,15 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
+
+    <color name="LightGray">#D3D3D3</color>
+
+    <!-- key buttons -->
+    <color name="key_btn_text">#FFFFFF</color>
+    <color name="key_btn_shadow">#FF0000</color>
+
+    <color name="ac_lcd">#B0B8B0</color>
+    <color name="ac_lcd_off">#505850</color>
+    <color name="ac_lcd_text">#304030</color>
+
 </resources>

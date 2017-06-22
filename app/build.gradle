@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "com.bomeans.irreader"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0.20170619"
+        versionName "1.0.20170622"
 
         applicationVariants.all { variant ->
             changeAPKName(variant, buildType)

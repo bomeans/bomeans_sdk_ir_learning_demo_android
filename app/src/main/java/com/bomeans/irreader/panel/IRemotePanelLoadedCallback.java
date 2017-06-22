@@ -5,4 +5,6 @@ package com.bomeans.irreader.panel;
  */
 
 public interface IRemotePanelLoadedCallback {
+
+    void onPanelLoaded(boolean succeeded);
 }
