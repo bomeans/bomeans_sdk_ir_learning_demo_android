@@ -18,8 +18,8 @@ import java.util.HashMap;
 public class BomeansIrReaderApp extends Application {
 
     // apply your api key and paste it below
-    private String API_KEY = "36c3862a5dddca583f3fb7e8effb712c0540ff7de";
-    private String MINT_API_KEY = "c4d2eaab";
+    private String API_KEY = "";    // contact Bomeans Design for a valid API key
+    private String MINT_API_KEY = "";   // for crash report, can be ignored.
 
     private BIRReader mIrReader = null;
     private BomeansUSBDongle mUsbDongle = null;
